@@ -3,19 +3,19 @@ USE biblioteca_pessoal_v1;
 
 CREATE TABLE usuario(
 	id_usuario INT PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR(255) NOT NULL UNIQUE, 
+	nome VARCHAR(255) NOT NULL, 
 	email VARCHAR(255) NOT NULL UNIQUE,
 	senha VARCHAR(255) NOT NULL,
-	data_cadastro TIMESTAMP, 
-	data_atualizacao TIMESTAMP
+	data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+	data_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE categoria(
 	id_categoria INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(128) NOT NULL UNIQUE, 
     descricao TEXT,
-    data_cadastro TIMESTAMP,
-    data_atualizacao TIMESTAMP
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    data_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE autor(
@@ -24,8 +24,8 @@ CREATE TABLE autor(
     ano_nascimento YEAR,
     ano_morte YEAR,
     apresentacao TEXT,
-    data_cadastro TIMESTAMP,
-    data_atualizacao TIMESTAMP
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    data_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE editora (
@@ -34,8 +34,8 @@ CREATE TABLE editora (
     cidade VARCHAR(64),
     estado VARCHAR(64),
     pais VARCHAR(64),
-    data_cadastro TIMESTAMP,
-    data_atualizacao TIMESTAMP 
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    data_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE livro(
@@ -46,11 +46,11 @@ CREATE TABLE livro(
     id_categoria INT NOT NULL,
     
     titulo VARCHAR(255) NOT NULL,
-    sinopse TEXT,
+    sinopse VARCHAR(255),
     ano_publicacao YEAR,
     lido BOOLEAN NOT NULL DEFAULT(0),
-    data_cadastro TIMESTAMP,
-    data_atualizacao TIMESTAMP,
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    data_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
 	CONSTRAINT fk_livro_usuario
 	FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
